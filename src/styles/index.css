@@ -1,0 +1,20 @@
+@import './shadcn.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background font-sans text-foreground;
+  }
+  nextjs-portal {
+    @apply hidden;
+  }
+  #react-refresh-overlay {
+    @apply hidden;
+  }
+}
