@@ -1,6 +1,6 @@
 import { keccak256 } from 'viem';
 import { privateKeyToAccount } from 'viem/accounts';
-import { PublicKey } from './tpke';
+import { getConsensusThreshold, getScaler, PublicKey } from './tpke';
 
 async function buildTransaction() {
   const privateKey = '0xc4ddeed5bd53f154151029b4a171f1dc68d9973dd831c0eecc77661656ae3b07';
@@ -31,13 +31,13 @@ describe('PublicKey', () => {
     );
   });
 
-  test('create works', () => {
-    const publicKey = PublicKey.create(
+  test('fromAggregatedCommitment works', () => {
+    const publicKey = PublicKey.fromAggregatedCommitment(
       Buffer.from(
         '0000000000000000000000000000000004f1c7e8d68052701518e38b4b64a55e1ce35392f13b773bcda20a54a386e83a47641b98c7abf3d8212061c16604ca9100000000000000000000000000000000071f445019d9e972465b04eee6cc5e842829f4103eeabe0e814c997034efbf4082f7505a53a39edf8efc61157bf4de66',
         'hex',
       ),
-      7,
+      getScaler(7n, getConsensusThreshold(7n)),
     );
     expect(Buffer.from(publicKey.toBytes()).toString('hex')).toBe(
       '84c7a302bd8fdd14c297c82f57db8788038489c8325574dad73cc4ceea2f30c673fe3558b3ef5df28d87f4ef4fd18c36',
