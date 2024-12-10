@@ -111,7 +111,7 @@ export function getScaler(size: bigint, threshold: bigint): bigint {
 }
 
 function randScalar(): bigint {
-  return randBetween(bls.G1.CURVE.n);
+  return randBetween(bls.G1.CURVE.n - 1n, 0n);
 }
 
 function randPg1(): ProjPointType<Fp> {
